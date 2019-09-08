@@ -11,8 +11,11 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var awesomeimageView: UIImageView!
     
-    var index = 0
+    var index = -1
+    var imageIndex = -1
+    let numberOfImages = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,7 @@ class ViewController: UIViewController {
                         "You are tremendous!",
                         "You've got the design skills of Jony Ive!",
                         "I can't wait to download your app!"]
-//        var newIndex = -1 // implicit
+
         var newIndex: Int //declares but doesn't initialize, explicit
         
         repeat{
@@ -41,29 +44,14 @@ class ViewController: UIViewController {
         index = newIndex
         messageLabel.text = messages[index]
         
-//        messageLabel.text = messages.randomElement()!
+        repeat{
+            newIndex = Int.random(in: 0..<numberOfImages)
+        }while imageIndex == newIndex
         
-//        messageLabel.text = messages[index]
-//
-//        if index == messages.count - 1{
-//            index = 0
-//        }else{
-//            index += 1
-//        }
+        imageIndex = newIndex
         
-//        let message1 = "You are fantastic!!!"
-//        let message2 = "You are great!"
-//        let message3 = "You are amazing!"
-//
-//        if messageLabel.text == message1{
-//            messageLabel.text = message2
-//        }
-//        else if messageLabel.text == message2{
-//            messageLabel.text = message3
-//        }
-//        else{
-//            messageLabel.text = message1
-//        }
+        awesomeimageView.image = UIImage(named: "image\(imageIndex)")
+
     }
     
 }
