@@ -11,8 +11,10 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var soundSwitch: UISwitch!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var awesomeimageView: UIImageView!
+    
     var awesomePlayer = AVAudioPlayer()
     var index = -1
     var imageIndex = -1
@@ -49,6 +51,12 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func soundSwitchPressed(_ sender: UISwitch) {
+        if soundSwitch.isOn == false && soundIndex != -1{
+            awesomePlayer.stop()
+        }
+    }
+
     @IBAction func showMessagePressed(_ sender: UIButton) {
         
         let messages = ["You are awesome!",
@@ -71,12 +79,19 @@ class ViewController: UIViewController {
         imageIndex = nonRepeatingRandom(lastNumber: imageIndex, maxValue: numberOfImages)
         awesomeimageView.image = UIImage(named: "image\(imageIndex)")
         
-        //Get a random number to use for our sound name file
-        soundIndex = nonRepeatingRandom(lastNumber: soundIndex, maxValue: numberOfSounds)
-        
-        //Play sound
-        let soundName = "sound\(soundIndex)"
-        playSound(soundName: soundName, audioPlayer: &awesomePlayer)
+       
+        if soundSwitch.isOn{
+            
+            //Get a random number to use for our sound name file
+            soundIndex = nonRepeatingRandom(lastNumber: soundIndex, maxValue: numberOfSounds)
+            
+            //Play sound
+            let soundName = "sound\(soundIndex)"
+            //        if soundSwitch.isOn == true{
+            
+            playSound(soundName: soundName, audioPlayer: &awesomePlayer)
+        }
+
 
     }
     
